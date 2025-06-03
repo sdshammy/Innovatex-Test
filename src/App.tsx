@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { IdeasProvider } from "@/contexts/IdeasContext";
 import Index from "./pages/Index";
+import Login from "./pages/Login";
 import SubmitIdea from "./pages/SubmitIdea";
 import Dashboard from "./pages/Dashboard";
 import IdeaDetail from "./pages/IdeaDetail";
@@ -22,6 +23,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<Index />} />
             <Route path="/submit" element={<SubmitIdea />} />
             <Route path="/dashboard" element={<Dashboard />} />
