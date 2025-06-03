@@ -42,32 +42,44 @@ const Index = () => {
 
   return (
     <Layout>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Welcome to the Canada Life Ideation Portal
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Empower innovation across operations. Submit your ideas, collaborate with teams, 
-            and drive meaningful change across GCC, Underwriting, Wealth Management, and beyond.
-          </p>
-          <div className="flex justify-center space-x-4">
-            <Link to="/submit">
-              <Button size="lg" className="bg-canada-red hover:bg-red-700 text-white">
-                <Lightbulb className="mr-2 h-5 w-5" />
-                Submit Your Idea
-              </Button>
-            </Link>
-            <Link to="/dashboard">
-              <Button variant="outline" size="lg">
-                View Dashboard
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
+      {/* Hero Section with Background */}
+      <div 
+        className="relative bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('/lovable-uploads/aff86c66-6b61-4121-a2cb-3febc6845819.png')`,
+          minHeight: '60vh'
+        }}
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center text-white">
+            <h1 className="text-5xl font-bold mb-4">
+              Welcome to the Canada Life Ideation Portal
+            </h1>
+            <p className="text-xl mb-8 max-w-3xl mx-auto">
+              Empower innovation across operations. Submit your ideas, collaborate with teams, 
+              and drive meaningful change across GCC, Underwriting, Wealth Management, and beyond.
+            </p>
+            <div className="flex justify-center space-x-4">
+              <Link to="/submit">
+                <Button size="lg" className="bg-canada-red hover:bg-red-700 text-white">
+                  <Lightbulb className="mr-2 h-5 w-5" />
+                  Submit Your Idea
+                </Button>
+              </Link>
+              <Link to="/dashboard">
+                <Button variant="outline" size="lg" className="bg-white text-gray-900 hover:bg-gray-100">
+                  View Dashboard
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
+      </div>
 
+      {/* Content Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Stats Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {stats.map((stat, index) => (

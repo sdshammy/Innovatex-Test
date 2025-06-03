@@ -1,12 +1,11 @@
 
 import Layout from '@/components/Layout';
+import IdeaCard from '@/components/IdeaCard';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { BarChart3, TrendingUp, Clock, Users, Search, Filter, MessageSquare, ThumbsUp, Eye } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { BarChart3, TrendingUp, Clock, Users, Search, Filter } from 'lucide-react';
 
 const Dashboard = () => {
   const ideas = [
@@ -21,7 +20,22 @@ const Dashboard = () => {
       priority: 'High',
       submittedDate: '2025-05-28',
       votes: 15,
-      comments: 8,
+      comments: [
+        {
+          id: 1,
+          author: 'Mike Chen',
+          content: 'This is a great idea! We have similar automation tools that could be leveraged.',
+          date: '2025-05-30',
+          likes: 5
+        },
+        {
+          id: 2,
+          author: 'Emily Davis',
+          content: 'The business case is solid. Have you considered the security implications?',
+          date: '2025-05-29',
+          likes: 3
+        }
+      ],
       views: 142,
       description: 'Implement an automated system to generate monthly financial reports, reducing manual effort by 80%.'
     },
@@ -36,7 +50,15 @@ const Dashboard = () => {
       priority: 'Medium',
       submittedDate: '2025-05-25',
       votes: 23,
-      comments: 12,
+      comments: [
+        {
+          id: 1,
+          author: 'David Wilson',
+          content: 'This would be very helpful for field agents. Great initiative!',
+          date: '2025-05-26',
+          likes: 8
+        }
+      ],
       views: 289,
       description: 'Develop a mobile app for on-the-go training modules and assessments for field agents.'
     },
@@ -51,7 +73,22 @@ const Dashboard = () => {
       priority: 'High',
       submittedDate: '2025-05-20',
       votes: 31,
-      comments: 18,
+      comments: [
+        {
+          id: 1,
+          author: 'Sarah Johnson',
+          content: 'Excellent work on the customer experience improvements.',
+          date: '2025-05-22',
+          likes: 12
+        },
+        {
+          id: 2,
+          author: 'Mike Chen',
+          content: 'The chat integration will be a game-changer for customer support.',
+          date: '2025-05-21',
+          likes: 7
+        }
+      ],
       views: 456,
       description: 'Enhance the customer portal with real-time policy updates and chat support integration.'
     },
@@ -66,31 +103,11 @@ const Dashboard = () => {
       priority: 'Medium',
       submittedDate: '2025-06-01',
       votes: 7,
-      comments: 3,
+      comments: [],
       views: 89,
       description: 'AI-powered scheduling system to optimize workforce allocation based on historical data and predictions.'
     }
   ];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'New': return 'bg-blue-100 text-blue-800';
-      case 'Under Review': return 'bg-yellow-100 text-yellow-800';
-      case 'In Progress': return 'bg-purple-100 text-purple-800';
-      case 'Approved': return 'bg-green-100 text-green-800';
-      case 'Rejected': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'High': return 'bg-red-100 text-red-800';
-      case 'Medium': return 'bg-orange-100 text-orange-800';
-      case 'Low': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
 
   return (
     <Layout>
@@ -208,65 +225,9 @@ const Dashboard = () => {
         </Card>
 
         {/* Ideas List */}
-        <div className="space-y-4">
+        <div className="space-y-6">
           {ideas.map((idea) => (
-            <Card key={idea.id} className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex-1">
-                    <Link to={`/idea/${idea.id}`} className="hover:text-canada-red transition-colors">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{idea.title}</h3>
-                    </Link>
-                    <p className="text-gray-600 mb-3">{idea.description}</p>
-                    
-                    <div className="flex items-center space-x-4 text-sm text-gray-500">
-                      <span>By {idea.author}</span>
-                      <span>•</span>
-                      <span>{idea.department}</span>
-                      <span>•</span>
-                      <span>{idea.lob}</span>
-                      <span>•</span>
-                      <span>Submitted {idea.submittedDate}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-col items-end space-y-2">
-                    <div className="flex space-x-2">
-                      <Badge className={getStatusColor(idea.status)}>
-                        {idea.status}
-                      </Badge>
-                      <Badge className={getPriorityColor(idea.priority)}>
-                        {idea.priority}
-                      </Badge>
-                    </div>
-                    <Badge variant="outline">{idea.category}</Badge>
-                  </div>
-                </div>
-                
-                <div className="flex justify-between items-center pt-4 border-t border-gray-200">
-                  <div className="flex items-center space-x-6 text-sm text-gray-500">
-                    <div className="flex items-center space-x-1">
-                      <ThumbsUp className="h-4 w-4" />
-                      <span>{idea.votes}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <MessageSquare className="h-4 w-4" />
-                      <span>{idea.comments}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Eye className="h-4 w-4" />
-                      <span>{idea.views}</span>
-                    </div>
-                  </div>
-                  
-                  <Link to={`/idea/${idea.id}`}>
-                    <Button variant="outline" size="sm">
-                      View Details
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
+            <IdeaCard key={idea.id} idea={idea} />
           ))}
         </div>
       </div>
