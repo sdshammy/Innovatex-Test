@@ -8,10 +8,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { useIdeas } from '@/contexts/IdeasContext';
+import { useNavigate } from 'react-router-dom';
 import { Lightbulb, Send } from 'lucide-react';
 
 const SubmitIdea = () => {
   const { toast } = useToast();
+  const { addIdea } = useIdeas();
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -26,6 +31,19 @@ const SubmitIdea = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Submitting idea:', formData);
+    
+    // Add the idea to the global context
+    addIdea({
+      title: formData.title,
+      description: formData.description,
+      lob: formData.lob,
+      department: formData.department,
+      category: formData.category,
+      priority: formData.impactLevel,
+      author: 'Current User', // In a real app, this would come from auth
+      businessCase: formData.businessCase,
+      expectedBenefits: formData.expectedBenefits
+    });
     
     toast({
       title: "Idea Submitted Successfully!",
@@ -43,6 +61,11 @@ const SubmitIdea = () => {
       businessCase: '',
       expectedBenefits: ''
     });
+
+    // Navigate to dashboard to see the new idea
+    setTimeout(() => {
+      navigate('/dashboard');
+    }, 2000);
   };
 
   const handleInputChange = (field: string, value: string) => {
