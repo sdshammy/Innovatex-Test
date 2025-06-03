@@ -9,13 +9,13 @@ import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const user = {
-    name: 'Shammy Syed',
-    role: 'Spec Support UnderWriter',
-    department: 'Technology',
+    name: 'John Anderson',
+    role: 'Senior Business Analyst',
+    department: 'Operations',
     lob: 'GCC',
-    email: 'Shammy.ahmed@canadalife.com',
+    email: 'john.anderson@canadalife.com',
     phone: '+1 (555) 123-4567',
-    location: 'Bangalore, India',
+    location: 'Toronto, ON',
     joinDate: 'January 2022',
     totalIdeas: 12,
     ideasImplemented: 4,
